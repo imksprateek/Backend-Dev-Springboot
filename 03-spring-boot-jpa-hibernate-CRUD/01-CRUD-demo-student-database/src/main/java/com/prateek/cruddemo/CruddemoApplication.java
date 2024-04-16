@@ -2,6 +2,7 @@ package com.prateek.cruddemo;
 
 import com.prateek.cruddemo.dao.StudentDAO;
 import com.prateek.cruddemo.entity.Student;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -63,6 +64,19 @@ primary key is specified at the end saying that this is the primary key for the 
 	Spring provides @Repository annotation which is a sub annotation of @Component for DAOs and repositories. This provides support for component scanning and translates JDBC exceptions.
  */
 
+/*To display the entries in database run-
+	sudo mysql
+	SELECT * FROM student_tracker.student;
+
+	To start AUTO_INCREMENT from a specific value run the query-
+	ALTER TABLE student_tracker.student AUTO_INCREMENT=3000;
+
+	To remove all entries from the database(Also resets AUTO_INCREMENT to 1), use-
+	TRUNCATE student_tracker.student;
+
+ */
+
+
 @SpringBootApplication
 public class CruddemoApplication {
 
@@ -72,14 +86,52 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 		return runner -> {
-			createStudent(studentDAO);
+			readStudent(studentDAO);
 		};
+	}
+
+	private void readStudent(StudentDAO studentDAO) {
+		//Create the student object
+		System.out.println("Creating new student object...");
+		Student tempStudent = new Student("Maria", "Deebee", "mariadb@gmail.com");
+
+		//save the student object
+		System.out.println("Saving the student ...");
+		studentDAO.save(tempStudent);
+
+		//display id of the saved student
+		System.out.println("Saved student. Generated id: " + tempStudent.getId());
+
+		//retrieve student based on id: primary key
+		System.out.println("Retrieving student with id: " + tempStudent.getId());
+		Student myStudent = studentDAO.findById(tempStudent.getId());
+
+		//display student
+		System.out.println("Found the student : " + myStudent);
+	}
+
+	private void createMultipleStudents(StudentDAO studentDAO) {
+		//create multiple students
+		System.out.println("Creating new student object...");
+		Student tempStudent1 = new Student("Jon", "Doe", "doe@gmail.com");
+		Student tempStudent2 = new Student("Steve", "jobs", "jobs@gmail.com");
+		Student tempStudent3 = new Student("Phil", "Knight", "knight@gmail.com");
+
+		//save the student objects
+		System.out.println("Saving the student ...");
+		studentDAO.save(tempStudent1);
+		studentDAO.save(tempStudent2);
+		studentDAO.save(tempStudent3);
+
+		System.out.println("Saved student1. Generated id: " + tempStudent1.getId());
+		System.out.println("Saved student2. Generated id: " + tempStudent2.getId());
+		System.out.println("Saved student3. Generated id: " + tempStudent3.getId());
 	}
 
 	private void createStudent(StudentDAO studentDAO) {
 		//Create the student object
 		System.out.println("Creating new student object...");
-		Student tempStudent = new Student("John", "Snow", "snowy@gmail.com");
+		Student tempStudent = new Student("Maria", "Deebee", "mariadb@gmail.com");
 
 		//save the student object
 		System.out.println("Saving the student ...");
@@ -88,4 +140,7 @@ public class CruddemoApplication {
 		//display id of the saved student
 		System.out.println("Saved student. Generated id: " + tempStudent.getId());
 	}
+
+	//To retrieve/read from database using the primary key, (if 1 is the primary key we want to search)
+	//Student myStudent = entityManager.find(Student.class, 1);
 }
