@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 //Entity class is a Java class that is mapped to a database table via Object to Relational Mapping (ORM)
 //An entity class must be annotated with @Entity, Must have one public or protected no-argument constructor, class can also have other constructors
 
@@ -17,7 +19,7 @@ import org.springframework.context.annotation.Bean;
 //If @Table name is not specified, the table name is same as the class. This is also not recommended
 
 //A primary key uniuely identifies each row in a table. It must be a unique value and cannot contain NULL values.
-//We make use of AUTO_INCREMENT in MySQL for primary key. For example,
+//We make use of AUTO_INCREMENT in MySQL for primary key. For example in SQL,
 /*
 CREATE TABLE student(
 	id int NOT NULL AUTO_INCREMENT,
@@ -38,7 +40,6 @@ primary key is specified at the end saying that this is the primary key for the 
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
 		@Column(name="id")
 		private int id;
-
 
 		...
 	}
@@ -86,8 +87,30 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 		return runner -> {
-			readStudent(studentDAO);
+//			createStudent(studentDAO);
+//			createMultipleStudents(studentDAO);
+//			readStudent(studentDAO);
+//			queryForStudents(studentDAO);
+			queryForStudentsByLastName(studentDAO);
 		};
+	}
+
+	private void queryForStudentsByLastName(StudentDAO studentDAO) {
+		List<Student> finalResults = studentDAO.findByLastName("Doe");
+
+		for (Student theStudent : finalResults){
+			System.out.println(theStudent);
+		}
+	}
+
+	private void queryForStudents(StudentDAO studentDAO) {
+		//get a list of students
+		List<Student> theStudents = studentDAO.findAll();
+		
+		//display that list of students
+		for(Student tempStudent : theStudents){
+			System.out.println(tempStudent);
+		}
 	}
 
 	private void readStudent(StudentDAO studentDAO) {
