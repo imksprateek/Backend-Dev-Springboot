@@ -92,8 +92,24 @@ public class CruddemoApplication {
 //			readStudent(studentDAO);
 //			queryForStudents(studentDAO);
 //			queryForStudentsByLastName(studentDAO);
-			updateStudent(studentDAO);
+//			updateStudent(studentDAO);
+//			deleteStudent(studentDAO);
+			deleteAll(studentDAO);
 		};
+	}
+
+	private void deleteAll(StudentDAO studentDAO) {
+		System.out.println("Deleting all students");
+		int numRowsDeleted = studentDAO.deleteAll();
+		System.out.println("Number of rows deleted: " + numRowsDeleted);
+	}
+
+	private void deleteStudent(StudentDAO studentDAO) {
+		int target_id = 1;
+
+		//Delete Student
+		System.out.println("Deleting student with id: " + target_id);
+		studentDAO.delete(target_id);
 	}
 
 	private void updateStudent(StudentDAO studentDAO) {
@@ -110,6 +126,7 @@ public class CruddemoApplication {
 
 		//Display the updated student
 		System.out.println("Student updated to " + theStudent.toString());
+		//only theStudent is also fine here without toString() method. Both will execute the toString() method directly or indirectly
 	}
 
 	private void queryForStudentsByLastName(StudentDAO studentDAO) {

@@ -66,9 +66,40 @@ public class StudentDAOImpl implements StudentDAO{
     }
 
     //@Transactional annotation needs to be used since we are performing an update
+    /*To Update last name for all students do this-
+        int numRowsUpdated = entityManager.createQuery("UPDATE SStudent SET lastName='Tester'").executeUpdate();
+     */
     @Override
     @Transactional
     public void update(Student theStudent) {
         entityManager.merge(theStudent);
+    }
+
+    /*
+        Deleting based on a condition-
+        int numRowsDeleted = entityManager.createQuery("DELETE FROM Student WHERE lastName='Doe'").executeUpdate();
+     */
+    //In JPA, the in the method name executeUpdate , "Update" is a generic term meaning we are modifying the database. So it applies to Udpate as well as Delete
+
+    /*
+        To delete all students,
+        int numRowsDeleted = entityManager.createQuery("DELETE FROM Student").executeUpdate();
+     */
+    @Override
+    @Transactional
+    public void delete(int target_id) {
+
+        System.out.println("Retreiving student with id: " + target_id);
+        Student theStudent = entityManager.find(Student.class, target_id);
+        entityManager.remove(theStudent);
+        //Display deleted Student
+        System.out.println("Deleted student: " + theStudent);
+    }
+
+    @Override
+    @Transactional
+    public int deleteAll() {
+        int numRowsDeleted = entityManager.createQuery("DELETE FROM Student").executeUpdate();
+        return numRowsDeleted;
     }
 }
