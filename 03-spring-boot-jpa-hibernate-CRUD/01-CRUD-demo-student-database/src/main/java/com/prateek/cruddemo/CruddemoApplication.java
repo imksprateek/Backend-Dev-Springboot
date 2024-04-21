@@ -150,7 +150,7 @@ public class CruddemoApplication {
 	private void readStudent(StudentDAO studentDAO) {
 		//Create the student object
 		System.out.println("Creating new student object...");
-		Student tempStudent = new Student("Maria", "Deebee", "mariadb@gmail.com");
+		Student tempStudent = new Student("John", "Snow", "johns@gmail.com");
 
 		//save the student object
 		System.out.println("Saving the student ...");
