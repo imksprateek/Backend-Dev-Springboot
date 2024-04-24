@@ -4,6 +4,7 @@ import com.ksprateek.springboot.cruddemo.dao.EmployeeDAO;
 import com.ksprateek.springboot.cruddemo.entity.Employee;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
