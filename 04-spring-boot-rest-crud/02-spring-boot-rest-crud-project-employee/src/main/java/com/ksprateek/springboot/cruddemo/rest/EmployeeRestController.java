@@ -27,6 +27,9 @@ public class EmployeeRestController {
         return employeeService.getAllEmployees();
     }
 
-
+    @GetMapping("/employees/{employeeId}")
+    public Employee getEmployee(@PathVariable int employeeId){
+        return employeeService.findById(employeeId);
+    }
 
 }
