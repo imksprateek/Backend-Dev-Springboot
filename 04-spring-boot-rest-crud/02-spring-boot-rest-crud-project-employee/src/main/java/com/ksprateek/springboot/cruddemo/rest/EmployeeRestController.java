@@ -29,7 +29,43 @@ public class EmployeeRestController {
 
     @GetMapping("/employees/{employeeId}")
     public Employee getEmployee(@PathVariable int employeeId){
-        return employeeService.findById(employeeId);
+        Employee theEmployee = employeeService.findById(employeeId);
+
+        if(theEmployee == null){
+            throw new RuntimeException("Employee id not found - " + employeeId);
+        }
+        return theEmployee;
     }
 
+//    Add mapping for POST /employees - add new employees
+    @PostMapping("/employees")
+    public Employee addEmployee(@RequestBody Employee theEmployee){
+        //Also just in case they pass an id in json.. Set id to 0
+        //This is to force a save of a new item instead of an update
+        theEmployee.setId(0);
+
+        Employee dbEmployee = employeeService.save(theEmployee);
+        return dbEmployee;
+    }
+
+    @PutMapping("/employees")
+    public Employee updateEmployee(@RequestBody Employee theEmployee){
+        //Id is not set to 0 here. So the merge call from EmployeeServiceImpl updates the data instead of insert
+        Employee dbEmployee = employeeService.save(theEmployee);
+
+        return dbEmployee;
+    }
+
+    @DeleteMapping("/employees/{employeeId}")
+    public String deleteEmployee(@PathVariable int employeeId){
+        Employee theEmployee = employeeService.findById(employeeId);
+
+        if (theEmployee == null){
+            throw new RuntimeException("Employee id not found - " + employeeId);
+        }
+
+        employeeService.deleteById(employeeId);
+
+        return "Deleted employee id - " + employeeId;
+    }
 }
