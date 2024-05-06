@@ -20,8 +20,25 @@ public class DemoSecurityConfig {
     //Add support for JDBC. No more hard coded users. Users and roles are in the database since we've executed the SQL script
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource){
-        //We're using a predefined table schema with our sample text sql script. So spring security knows the exact column names and values that it'll use
-        return new JdbcUserDetailsManager(dataSource);
+//        Use the following line if you're using JDBC's default schemas and table/column names. We're using a predefined table schema with our sample text sql script. So spring security knows the exact column names and values that it'll use
+//        return new JdbcUserDetailsManager(dataSource);
+
+
+        //To use custom Database schema we need to tell Spring Security how to access it (Run SQL setup script 06 first):
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+
+        //Define query to retrieve a user by username
+        jdbcUserDetailsManager.setUsersByUsernameQuery(
+                //Following is a regular SQL query
+                "select user_id, pw, active from members where user_id=?"
+        );
+
+        //Define query to retrieve the authorities/roles by username
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+                "select user_id, role from roles where user_id=?"
+        );
+
+        return jdbcUserDetailsManager;
     }
 
     @Bean
