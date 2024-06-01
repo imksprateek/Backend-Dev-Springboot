@@ -9,6 +9,7 @@ import me.ksprateek.mongodemo.service.SearchService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -41,6 +42,46 @@ public class ProductController {
     @GetMapping("/search/is")
     public ResponseEntity<List<Product>> getProductsByName(@RequestParam("name") String name) {
         return ResponseEntity.ok(searchService.searchByName(name));
+    }
+
+    @GetMapping("/search/starts-with")
+    public ResponseEntity<List<Product>> getProductsByNameStartsWith(@RequestParam("name") String name) {
+        return ResponseEntity.ok(searchService.searchByNameStartsWith(name));
+    }
+
+    @GetMapping("/search/ends-with")
+    public ResponseEntity<List<Product>> getProductsByNameEndsWith(@RequestParam("name") String name) {
+        return ResponseEntity.ok(searchService.searchByNameEndsWith(name));
+    }
+
+    @GetMapping("/search/price-greater-than")
+    public ResponseEntity<List<Product>> getProductsByPriceGreaterThan(@RequestParam("price") BigDecimal price) {
+        return ResponseEntity.ok(searchService.searchByPriceGreaterThan(price));
+    }
+
+    @GetMapping("/search/price-lower-than")
+    public ResponseEntity<List<Product>> getProductsByPriceLowerThan(@RequestParam("price") BigDecimal price) {
+        return ResponseEntity.ok(searchService.searchByPriceLowerThan(price));
+    }
+
+    @GetMapping("/search/rating-greater-than")
+    public ResponseEntity<List<Product>> getProductsByRatingGreaterThan(@RequestParam("rating") Double rating) {
+        return ResponseEntity.ok(searchService.searchByRatingGreaterThan(rating));
+    }
+
+    @GetMapping("/search/rating-lower-than")
+    public ResponseEntity<List<Product>> getProductsByRatingLowerThan(@RequestParam("rating") Double rating) {
+        return ResponseEntity.ok(searchService.searchByRatingLowerThan(rating));
+    }
+
+    @GetMapping("/search/quantity-greater-than")
+    public ResponseEntity<List<Product>> getProductsByQuantityGreaterThan(@RequestParam("quantity") Double qty) {
+        return ResponseEntity.ok(searchService.searchByQuantityGreaterThan(qty));
+    }
+
+    @GetMapping("/search/quantity-lower-than")
+    public ResponseEntity<List<Product>> getProductsByQuantityLowerThan(@RequestParam("quantity") Double qty) {
+        return ResponseEntity.ok(searchService.searchByQuantityLowerThan(qty));
     }
 
 }
