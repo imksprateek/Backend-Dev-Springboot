@@ -84,4 +84,14 @@ public class ProductController {
         return ResponseEntity.ok(searchService.searchByQuantityLowerThan(qty));
     }
 
+    @GetMapping("/sort/by-field")
+    public ResponseEntity<List<Product>> getProductsSortedByField(@RequestParam("field") String fieldName, @RequestParam("order") String order) {
+        return ResponseEntity.ok(searchService.sortByField(fieldName, order));
+    }
+
+    @GetMapping("/sort/page-by-field")
+    public ResponseEntity<List<Product>> getProductsPagedByField(@RequestParam("field") String fieldName, @RequestParam("order") String order, @RequestParam("page") int pageNumber) {
+        return ResponseEntity.ok(searchService.sortAndPageByField(fieldName, order, pageNumber));
+    }
+
 }
