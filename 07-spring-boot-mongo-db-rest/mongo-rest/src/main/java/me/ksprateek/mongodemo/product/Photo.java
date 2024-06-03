@@ -1,5 +1,7 @@
 package me.ksprateek.mongodemo.product;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +16,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Photo {
     @Id
     private String id;
+    @JsonIgnore
     private Binary image;
-
 }

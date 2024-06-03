@@ -20,7 +20,7 @@ public class PhotoController {
     private final PhotoService service;
 
     @PostMapping("/add")
-    public String addPhoto(@RequestParam("photo") MultipartFile file) throws IOException {
+    public String addPhoto(@RequestParam(value = "photo") MultipartFile file) throws IOException {
         String id = service.addPhoto(file);
         return id;
     }

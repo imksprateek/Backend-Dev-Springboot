@@ -31,6 +31,6 @@ public class Product {
     @DBRef
     private Category category;
 
-//    @DBRef
-//    private Photo photo;
+    @DBRef
+    private Photo photo;
 }
