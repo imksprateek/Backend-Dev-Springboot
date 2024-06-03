@@ -30,4 +30,7 @@ public class Product {
     //Use @DBRef to link to documents in another repository(Collection)
     @DBRef
     private Category category;
+
+//    @DBRef
+//    private Photo photo;
 }
