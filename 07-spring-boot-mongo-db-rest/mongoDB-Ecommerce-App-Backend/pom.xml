@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>me.ksprateek</groupId>
-	<artifactId>mongodemo</artifactId>
+	<artifactId>mongoDB-Ecommerce-App-Backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Mongo-Demo</name>
 	<description>Demo project for Spring Boot with MongoDB</description>
