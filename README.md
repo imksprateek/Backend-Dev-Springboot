@@ -25,7 +25,7 @@ Spring Boot and Spring Framework are widely used in the Java ecosystem for build
 
 1. **Dependency Injection**: Understanding and utilizing Spring's powerful dependency injection mechanism.
 2. **Web Development**: Building RESTful APIs, web applications, and WebSocket-based communication.
-3. **Database Access**: Integrating Spring Data JPA, Hibernate, and other ORM frameworks for database access.
+3. **Database Access**: Integrating Spring Data JPA, Hibernate and other ORM frameworks, MySQL and MongoDB for database access.
 4. **Security**: Implementing authentication and authorization using Spring Security.
 5. **Messaging**: Utilizing Spring Messaging for asynchronous communication and integration with messaging brokers.
 6. **Testing**: Writing unit tests, integration tests, and end-to-end tests for Spring applications.
