@@ -29,6 +29,8 @@ public class CustomerController {
         //Print statement for debugging
         System.out.println("Last Name: |" + theCustomer.getLastName() + "|");
         //if validation fails, return the user back to customer-form page. If it succeeds, redirect user to customer-confirmation page
+        System.out.println("Binding Results: " + theBindingResult.toString());
+        System.out.println("\n\n\n\n");
         if(theBindingResult.hasErrors()){
             return "customer-form";
         }else{
