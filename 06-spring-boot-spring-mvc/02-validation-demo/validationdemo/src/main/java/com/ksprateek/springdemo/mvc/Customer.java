@@ -1,4 +1,5 @@
 package com.ksprateek.springdemo.mvc;
+import com.ksprateek.springdemo.mvc.validation.CourseCode;
 import jakarta.validation.constraints.*;
 
 public class Customer {
@@ -21,8 +22,18 @@ public class Customer {
     @Pattern(regexp = "^[a-zA-Z0-9]{5}$", message = "only 5 chars/digits")
     private String postalCode;
 
+    @CourseCode(value = "LUV", message = "must start with LUV")
+    private String courseCode;
 
-//    Getters and Setters
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    //    Getters and Setters
     public String getPostalCode() {
         return postalCode;
     }
